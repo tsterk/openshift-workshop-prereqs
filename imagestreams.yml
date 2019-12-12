@@ -2,8 +2,8 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   annotations:
-    openshift.io/display-name: PHP
-  name: php
+    openshift.io/display-name: Workshop PHP
+  name: workshop-php
 spec:
   lookupPolicy:
     local: false
@@ -23,5 +23,33 @@ spec:
     generation: 2
     importPolicy: {}
     name: "7.2"
+    referencePolicy:
+      type: Local
+
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/display-name: Workshop Nginx
+  name: workshop-nginx
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      description: A Nginx webserver
+      iconClass: icon-nginx
+      openshift.io/display-name: Nginx 1.17
+      openshift.io/provider-display-name: NPO Hosting
+      supports: nginx:1.17,nginx
+      tags: builder,nginx
+      version: "1.17"
+    from:
+      kind: DockerImage
+      name: npohosting/nginx:1.17
+    generation: 2
+    importPolicy: {}
+    name: "1.17"
     referencePolicy:
       type: Local
