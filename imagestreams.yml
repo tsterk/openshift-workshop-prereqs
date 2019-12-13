@@ -19,7 +19,7 @@ spec:
       version: "7.2"
     from:
       kind: DockerImage
-      name: tsterk/php:7.2-fpm
+      name: tsterk/php:72-centos
     generation: 2
     importPolicy: {}
     name: "7.2"
@@ -31,25 +31,21 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   annotations:
-    openshift.io/display-name: Workshop Nginx
-  name: workshop-nginx
+    openshift.io/display-name: Workshop JBoss
+  name: jboss-eap70-openshift
 spec:
   lookupPolicy:
-    local: false
+    local: False
   tags:
   - annotations:
-      description: A Nginx webserver
-      iconClass: icon-nginx
-      openshift.io/display-name: Nginx 1.17
-      openshift.io/provider-display-name: NPO Hosting
-      supports: nginx:1.17,nginx
-      tags: builder,nginx
-      version: "1.17"
+      openshift.io/display-name: JBoss
+      iconClass: icon-jboss
+      version: "1.6"
     from:
       kind: DockerImage
-      name: npohosting/nginx:1.17
+      name: tsterk/eap70-openshift:1.6
     generation: 2
     importPolicy: {}
-    name: "1.17"
+    name: "1.6"
     referencePolicy:
       type: Local
