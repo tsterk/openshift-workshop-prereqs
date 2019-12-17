@@ -183,7 +183,13 @@ objects:
         kind: ImageStreamTag
         name: ${APPLICATION_NAME}:latest
     postCommit: {}
-    resources: {}
+    resources:
+      limits:
+        cpu: "1"
+        memory: 768Mi
+      requests:
+        cpu: "1"
+        memory: 768Mi
     runPolicy: Serial
     source:
       git:
@@ -237,7 +243,11 @@ objects:
             containerName: ${APPLICATION_NAME}
           failurePolicy: Ignore
         timeoutSeconds: 600
-      resources: {}
+      resources:
+        limits:
+          memory: 768Mi
+        requests:
+          memory: 768Mi
       type: Recreate
     template:
       metadata:
@@ -290,11 +300,6 @@ objects:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          resources:
-            limits:
-              memory: 768Mi
-            requests:
-              memory: 768Mi
           name: ${APPLICATION_NAME}
           ports:
           - containerPort: 8787
