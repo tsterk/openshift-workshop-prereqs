@@ -221,11 +221,6 @@ objects:
             containerName: ${APPLICATION_NAME}
           failurePolicy: Ignore
         timeoutSeconds: 600
-      resources:
-        limits:
-          memory: 768Mi
-        requests:
-          memory: 768Mi
       type: Recreate
     template:
       metadata:
@@ -267,6 +262,13 @@ objects:
                 key: db.name
                 name: mlbparks
           image: ${APPLICATION_NAME}
+          resources:
+            limits:
+              memory: 768Mi
+              cpu: "1"
+            requests:
+              memory: 768Mi
+              cpu: "1"
           imagePullPolicy: IfNotPresent
           name: ${APPLICATION_NAME}
           ports:
