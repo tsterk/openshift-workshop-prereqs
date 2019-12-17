@@ -103,31 +103,10 @@ objects:
             value: ${MONGODB_ADMIN_USER}
           image: ${MONGODB_APPLICATION_NAME}
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            tcpSocket:
-              port: 27017
-            timeoutSeconds: 1
           name: ${MONGODB_APPLICATION_NAME}
           ports:
           - containerPort: 27017
             protocol: TCP
-          readinessProbe:
-            exec:
-              command:
-              - /bin/sh
-              - -i
-              - -c
-              - mongo 127.0.0.1:27017/$MONGODB_DATABASE -u $MONGODB_USER -p $MONGODB_PASSWORD
-                --eval="quit()"
-            failureThreshold: 3
-            initialDelaySeconds: 600
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           resources:
             limits:
               memory: 512Mi
@@ -289,16 +268,6 @@ objects:
                 name: mlbparks
           image: ${APPLICATION_NAME}
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /ws/healthz/
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 600
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           name: ${APPLICATION_NAME}
           ports:
           - containerPort: 8787
@@ -313,16 +282,6 @@ objects:
           - containerPort: 8888
             name: ping
             protocol: TCP
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /ws/healthz/
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 20
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           terminationMessagePath: /dev/termination-log
         dnsPolicy: ClusterFirst
         restartPolicy: Always
