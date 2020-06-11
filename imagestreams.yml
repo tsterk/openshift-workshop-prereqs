@@ -19,7 +19,7 @@ spec:
       version: "7.2"
     from:
       kind: DockerImage
-      name: tsterk/php:72-centos
+      name: tsterk/php-72-centos
     generation: 2
     importPolicy: {}
     name: "7.2"
